@@ -52,8 +52,6 @@ public class Checkerboard {
         System.out.print('╗');
         System.out.println();
 
-        n = nStart;
-
         for (int i = 0; i < lines; i++) {
             n = nStart;
             firstLineSign = sign;
