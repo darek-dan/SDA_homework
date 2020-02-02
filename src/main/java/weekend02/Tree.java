@@ -9,12 +9,12 @@ public class Tree {
         Scanner scanner = new Scanner(System.in);
         int base;
         do {
-            System.out.println("Podaj wysokość choinki w zakresie od 3 do 101");
+            System.out.println("Podaj wysokość choinki w zakresie od 2 do 100");
             base = scanner.nextInt();
-            if (base < 3 || base > 101) {
+            if (base < 2 || base > 100) {
                 System.out.println("Podałeś liczbę która nie mieści się w zakresie");
             }
-        } while (base < 3 || base > 101);
+        } while (base < 2 || base > 100);
 
         int numberOfStars = 1;
         int numberOfSpaces;
