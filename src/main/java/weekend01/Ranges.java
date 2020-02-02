@@ -1,6 +1,6 @@
 package weekend01;
 
-public class ranges {
+public class Ranges {
 
     // declaration of variables
     private static int intMin;

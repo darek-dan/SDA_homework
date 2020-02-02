@@ -1,6 +1,6 @@
 package weekend01;
 
-public class boxedPrimitves {
+public class BoxedPrimitves {
     public static void main(String[] args) {
         Integer intValBoxed = 10;
         Long longValBoxed = 10L;
