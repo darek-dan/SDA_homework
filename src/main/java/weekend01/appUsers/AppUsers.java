@@ -55,9 +55,10 @@ public class AppUsers {
     public static void main(String[] args) {
         UsersCollection usersCollection = new UsersCollection();
         int choice = 0;
-        int choseUser = 101;
         while (choice != 4) {
             choice = menu();
+            int choseUser = 101;
+
             switch (choice) {
                 case 1:
                     System.out.println("Oto dane podstawowe wszystkich użytkowników: ");
@@ -82,7 +83,7 @@ public class AppUsers {
                         }
 
                     }
-                    continue;
+                    break;
 
                 case 2:
                     usersCollection.addUser(new User(userFirstName(), userLastName(), userSex()));
