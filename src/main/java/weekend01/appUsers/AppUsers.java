@@ -45,9 +45,9 @@ public class AppUsers {
 
     public static User.Sex userSex() {
         if (sex() == 1) {
-            return User.Sex.MALE;
-        } else {
             return User.Sex.FEMALE;
+        } else {
+            return User.Sex.MALE;
         }
     }
 
@@ -55,12 +55,35 @@ public class AppUsers {
     public static void main(String[] args) {
         UsersCollection usersCollection = new UsersCollection();
         int choice = 0;
+        int choseUser = 101;
         while (choice != 4) {
             choice = menu();
             switch (choice) {
                 case 1:
+                    System.out.println("Oto dane podstawowe wszystkich użytkowników: ");
+                    System.out.println();
                     usersCollection.printAllUsers();
+                    System.out.println();
+                    System.out.println("Jeśli chcesz wyświetlić dodatkowe informację o użytkowniku wybierz jego numer i naciśnij enter");
+                    System.out.println("Jeśli nie wpisz 0 i wciśnij enter");
+
+
+                    while (choseUser != 0) {
+                        choseUser = choseUser();
+                        if (choseUser == 0) {break;}
+                        // System.out.println(usersCollection.usersTotal);
+                        // System.out.println(choseUser);
+                        if (usersCollection.usersTotal < choseUser) {
+                            System.out.println("!!!!!!!!   TAKI UŻYTKOWNIK NIE ISTNIEJE   !!!!!!!!!");
+                            break;
+                        } else {
+                            usersCollection.setActualUserNumber(choseUser);
+                            usersCollection.printExtendedUser(choseUser - 1);
+                        }
+
+                    }
                     continue;
+
                 case 2:
                     usersCollection.addUser(new User(userFirstName(), userLastName(), userSex()));
                     usersCollection.printAllUsers();
@@ -72,12 +95,15 @@ public class AppUsers {
                     System.out.println("#################    KONIEC PROGRAMU    #################");
                     continue;
             }
-            System.out.println("#################    KONIEC PROGRAMU    #################");
-
         }
-
     }
 
+    public static int choseUser() {
+        int choseUser;
+        Scanner scanner = new Scanner(System.in);
+        choseUser = scanner.nextInt();
+        return choseUser;
+    }
 
     public static int menu() {
         Scanner scanner = new Scanner(System.in);

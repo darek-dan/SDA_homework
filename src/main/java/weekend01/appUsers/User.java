@@ -4,23 +4,23 @@ import java.util.Scanner;
 
 public class User {
 
-    private final String firstName;
-    private final String lastName;
     public enum Sex {
         MALE,
         FEMALE,
     }
+    private final String firstName;
+    private final String lastName;
     private Sex sex;
     private int height;
     private String birthDate;
     private String[] interests;
     // static final int MIN_AGE = 18;
+
     public User(String firstName, String lastName, Sex sex) {
 
         this.firstName = firstName;
         this.lastName = lastName;
         this.sex = sex;
-
     }
 
     public User(String firstName, String lastName, Sex sex, int height, String birthDate, String[] interests) {
@@ -31,7 +31,6 @@ public class User {
         this.height = height;
         this.birthDate = birthDate;
         this.interests = interests;
-
     }
 
     User(User other) {
@@ -46,7 +45,6 @@ public class User {
         System.out.println("Imie:      " + firstName);
         System.out.println("Nazwisko:  " + lastName);
         System.out.println("Płeć:      " + sex);
-
     }
 
     @Override
