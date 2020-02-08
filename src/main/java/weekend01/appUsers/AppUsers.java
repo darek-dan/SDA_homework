@@ -1,13 +1,15 @@
 package weekend01.appUsers;
 
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class AppUsers {
 
-    public static String userFirstName() {
+    public static String getUserFirstName() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Podaj imie użytkownika: ");
         return scanner.nextLine();
+
     }
 
     public static String userName() {
@@ -52,7 +54,7 @@ public class AppUsers {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         UsersCollection usersCollection = new UsersCollection();
         int choice = 0;
         while (choice != 4) {
@@ -71,7 +73,9 @@ public class AppUsers {
 
                     while (choseUser != 0) {
                         choseUser = choseUser();
-                        if (choseUser == 0) {break;}
+                        if (choseUser == 0) {
+                            break;
+                        }
                         // System.out.println(usersCollection.usersTotal);
                         // System.out.println(choseUser);
                         if (usersCollection.usersTotal < choseUser) {
@@ -80,14 +84,17 @@ public class AppUsers {
                         } else {
                             usersCollection.setActualUserNumber(choseUser);
                             usersCollection.printExtendedUser(choseUser - 1);
+                            break;
                         }
 
                     }
                     break;
 
                 case 2:
-                    usersCollection.addUser(new User(userFirstName(), userLastName(), userSex()));
+                    usersCollection.addUser(new User(getUserFirstName(), userLastName(), userSex()));
                     usersCollection.printAllUsers();
+                    System.out.println("Poprawnie wprowadzono dane obowiązkowe. Czy chcesz wprowadzić dane opcjonalne?");
+
                     continue;
                 case 3:
                     System.out.println("Funkcja nie zaimplementowana");
@@ -95,6 +102,8 @@ public class AppUsers {
                 case 4:
                     System.out.println("#################    KONIEC PROGRAMU    #################");
                     continue;
+                case 5:
+                    usersCollection.LoadUsersFromFile();
             }
         }
     }
@@ -105,6 +114,12 @@ public class AppUsers {
         choseUser = scanner.nextInt();
         return choseUser;
     }
+
+    //  public static boolean yesNo () {
+    //   boolean yesNo;
+    // Scanner scanner = new Scanner(System.in);
+    // if (scanner.nextLine())
+    // }
 
     public static int menu() {
         Scanner scanner = new Scanner(System.in);
@@ -117,8 +132,10 @@ public class AppUsers {
         System.out.println("2. Dodaj nowego użytkownika");
         System.out.println("3. Edytuj użytkownika");
         System.out.println("4. Zakończ działanie");
+        System.out.println("5. Wczytaj Użytkowników z pliku");
+
         System.out.println("");
-        System.out.println("Wybierz 1, 2 lub 3 i naciśnij enter");
+        System.out.println("Wpisz odpowiednią cyfrę i naciśnij enter");
         switch (scanner.nextInt()) {
             case 1:
                 return 1;
@@ -128,6 +145,8 @@ public class AppUsers {
                 return 3;
             case 4:
                 return 4;
+            case 5:
+                return 5;
             default:
                 System.out.println("Niewłaściwy wybór! Spróbuj jeszcze raz");
                 System.out.println();
