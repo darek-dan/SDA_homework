@@ -25,8 +25,10 @@ public class UsersCollection {
     }
 
     void addUsersFromFile() throws FileNotFoundException {
+
         Scanner scanner = new Scanner(new File("C:\\Users\\darek\\OneDrive\\Java\\SDA_homework\\src\\main" +
                 "\\java\\weekend01\\appUsers\\Users.txt"));
+
         while (scanner.hasNext()) {
             scanner.findInLine("firstName=");
             String userFirstName = scanner.next();
@@ -44,27 +46,15 @@ public class UsersCollection {
             String birthDate = scanner.next();
             LocalDate dateOfBirthParsed = LocalDate.parse(birthDate);
 
-            // String[] interests = scanner.nextLine().split(",");
-            Pattern interestsPattern = Pattern.compile("\".+\".+");
-            Matcher interestsMatched = interestsPattern.matcher(scanner.nextLine());
-            // System.out.println(interestsMatched);
-            String[] tempInterests = new String[100];
-            int numberOfInterests = 0;
-            while (interestsMatched.find()) {
-                tempInterests[numberOfInterests] = interestsMatched.group();
-                numberOfInterests++;
-            }
-            String[] interests = new String[numberOfInterests];
+            scanner.findInLine("interests= ");
+            Pattern interestsPattern = Pattern.compile("[^/]*///(.*)///.*");
+            Matcher interestsMatched = interestsPattern.matcher(scanner.findInLine(interestsPattern));
+            interestsMatched.find();
+            String[] interests = interestsMatched.group(1).split(",");
 
-            for (int i = 0; i < numberOfInterests; i++) {
-                interests[i] = tempInterests[i];
-                i++;
-                // System.out.println(Arrays.toString(tempInterests));
-            }
-            // scanner.nextLine();
+            scanner.nextLine();
             System.out.println("Dodano: " + userFirstName + " " + userLastName);
             addUser(new User(userNumber + 1, userFirstName, userLastName, userSex(), userHeight, dateOfBirthParsed, interests));
-            // scanner.findInLine("end;");
         }
     }
 
@@ -106,9 +96,12 @@ public class UsersCollection {
         } else {
             sex = "Kobieta";
         }
-        System.out.println("Użytkownik " + user.getUserNumber() + " Imie: "
-                + user.getFirstName() + " Nazwisko: " + user.getLastName() + " płeć: " + sex
-                + " Data urodzenia: " + user.getBirthDate() + " zainteresowania: " + printInterests(user.getInterests()));
+        System.out.println("Użytkownik:      " + user.getUserNumber() + "\n" +
+                "Imie:            " + user.getFirstName() + "\n" +
+                "Nazwisko:        " + user.getLastName() + "\n" +
+                "płeć:            " + sex + "\n" +
+                "Data urodzenia:  " + user.getBirthDate() + "\n" +
+                "zainteresowania: " + printInterests(user.getInterests()));
 
     }
 
@@ -120,7 +113,7 @@ public class UsersCollection {
     String printInterests(String[] interests) {
         StringBuilder interestsString = new StringBuilder();
         for (String element : interests) {
-            interestsString.append(element);
+            interestsString.append(element + ", ");
         }
         return interestsString.toString();
     }

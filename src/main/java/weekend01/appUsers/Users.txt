@@ -1,3 +1,3 @@
-firstName= Dariusz lastName= Dankowski sex= MALE height= 180 birthDate= 1986-10-18 interests= "killing people","writing programs","killing even more people","killing them all"
-firstName= Justyna lastName= Wabiszewska sex= FEMALE height= 161 birthDate= 1989-06-13 interests= "instagraming","writing posts","instagraming even more","instagraming all the time"
-firstName= Przemysław lastName= Dankowski sex= MALE height= 183 birthDate= 1988-12-04 interests= "drinking beer","writing books","drinking even more beers","drink them all"
+firstName= Dariusz lastName= Dankowski sex= MALE height= 180 birthDate= 1986-10-18 interests= ///killing people,writing programs,killing even more people,killing them all///
+firstName= Justyna lastName= Wabiszewska sex= FEMALE height= 161 birthDate= 1989-06-13 interests= ///instagraming,writing posts,instagraming even more,instagraming all the time///
+firstName= Przemysław lastName= Dankowski sex= MALE height= 183 birthDate= 1988-12-04 interests= ///drinking beer,writing books,drinking even more beers,drink them all///
