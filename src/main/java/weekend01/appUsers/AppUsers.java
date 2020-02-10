@@ -37,7 +37,7 @@ public class AppUsers {
                     System.out.println("#################    KONIEC PROGRAMU    #################");
                     continue;
                 case 5:
-                    usersCollection.loadUsersFromFile();
+                    usersCollection.addUsersFromFile();
                     continue;
                 case 6:
                     usersCollection.WriteUsersToFile();
@@ -79,11 +79,11 @@ public class AppUsers {
         return sex;
     }
 
-    public static User.Sex userSex() {
+    public static User.sex userSex() {
         if (sex() == 1) {
-            return User.Sex.FEMALE;
+            return User.sex.FEMALE;
         } else {
-            return User.Sex.MALE;
+            return User.sex.MALE;
         }
     }
 

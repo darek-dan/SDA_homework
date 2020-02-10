@@ -1,24 +1,23 @@
 package weekend01.appUsers;
 
 import java.time.LocalDate;
-import java.util.Scanner;
 
 public class User {
 
     private int userNumber = 0;
     private final String firstName;
     private final String lastName;
-    private Sex sex;
+    private User.sex sex;
     private int height;
     private LocalDate birthDate;
     private String[] interests;
     // static final int MIN_AGE = 18;
-    enum Sex {
+    enum sex {
         MALE,
         FEMALE,
     }
 
-    public User(int userNumber, String firstName, String lastName, Sex sex) {
+    public User(int userNumber, String firstName, String lastName, User.sex sex) {
 
         this.userNumber = userNumber;
         this.firstName = firstName;
@@ -26,7 +25,7 @@ public class User {
         this.sex = sex;
     }
 
-    public User(int userNumber, String firstName, String lastName, Sex sex, int height, LocalDate birthDate, String[] interests) {
+    public User(int userNumber, String firstName, String lastName, User.sex sex, int height, LocalDate birthDate, String[] interests) {
 
         this.userNumber = userNumber;
         this.firstName = firstName;
@@ -68,11 +67,11 @@ public class User {
         return lastName;
     }
 
-    public Sex getSex() {
+    public User.sex getSex() {
         return sex;
     }
 
-    public void setSex(Sex sex) {
+    public void setSex(User.sex sex) {
         this.sex = sex;
     }
 

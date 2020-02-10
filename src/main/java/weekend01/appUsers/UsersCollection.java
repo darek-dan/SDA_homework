@@ -15,7 +15,7 @@ public class UsersCollection {
     User[] users = new User[100];
     int userNumber = 0;
     int actualUserNumber;
-    private User.Sex sex;
+    private User.sex sex;
 
     void addUser(User... users) {
         for (User newUser : users) {
@@ -24,7 +24,7 @@ public class UsersCollection {
         }
     }
 
-    void loadUsersFromFile() throws FileNotFoundException {
+    void addUsersFromFile() throws FileNotFoundException {
         Scanner scanner = new Scanner(new File("C:\\Users\\darek\\OneDrive\\Java\\SDA_homework\\src\\main" +
                 "\\java\\weekend01\\appUsers\\Users.txt"));
         while (scanner.hasNext()) {
@@ -100,8 +100,14 @@ public class UsersCollection {
     }
 
     void printExtendedUser(User user) {
+        String sex;
+        if (user.getSex().equals(User.sex.MALE)) {
+            sex = "Mężczyzna";
+        } else {
+            sex = "Kobieta";
+        }
         System.out.println("Użytkownik " + user.getUserNumber() + " Imie: "
-                + user.getFirstName() + " Nazwisko: " + user.getLastName() + "płeć: " + user.getSex()
+                + user.getFirstName() + " Nazwisko: " + user.getLastName() + " płeć: " + sex
                 + " Data urodzenia: " + user.getBirthDate() + " zainteresowania: " + printInterests(user.getInterests()));
 
     }
@@ -123,11 +129,11 @@ public class UsersCollection {
         user.setHeight(height);
     }
 
-    public static User.Sex userSex() {
+    public static User.sex userSex() {
         if (userSex.equals("FEMALE")) {
-            return User.Sex.FEMALE;
+            return User.sex.FEMALE;
         } else {
-            return User.Sex.MALE;
+            return User.sex.MALE;
         }
     }
 
