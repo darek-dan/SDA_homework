@@ -10,12 +10,11 @@ import java.util.regex.Pattern;
 
 public class UsersCollection {
 
-    final LocalDate dateDefault = LocalDate.parse("1000-01-01");
+    final public LocalDate dateDefault = LocalDate.parse("1000-01-01");
     private static String userSex;
     User[] users = new User[100];
     int userNumber = 0;
     int actualUserNumber;
-    private User.sex sex;
 
     void addUser(User... users) {
         for (User newUser : users) {
@@ -50,7 +49,7 @@ public class UsersCollection {
             Pattern interestsPattern = Pattern.compile("[^/]*///(.*)///.*");
             Matcher interestsMatched = interestsPattern.matcher(scanner.findInLine(interestsPattern));
             interestsMatched.find();
-            String[] interests = interestsMatched.group(1).split(",");
+            String[] interests = interestsMatched.group(1).split(", ");
 
             scanner.nextLine();
             System.out.println("Dodano: " + userFirstName + " " + userLastName);
@@ -74,9 +73,9 @@ public class UsersCollection {
     }
 
     String BuildLineToSave(User user) {
-        String lineToSave = ("firstName= " + user.getFirstName() + " lastName= " + user.getLastName() +
-                " sex= " + user.getSex() + " end;\r\n");
-        return lineToSave;
+        return ("firstName= " + user.getFirstName() + " lastName= " + user.getLastName() +
+                " sex= " + user.getSex() + " height= " + user.getHeight() + " birthDate= " + user.getBirthDate() +
+                " interests= ///" + printInterests(user.getInterests()) + "///\r\n");
     }
 
     void printAllUsers() {
@@ -113,13 +112,17 @@ public class UsersCollection {
     String printInterests(String[] interests) {
         StringBuilder interestsString = new StringBuilder();
         for (String element : interests) {
-            interestsString.append(element + ", ");
+            interestsString.append(element).append(", ");
         }
         return interestsString.toString();
     }
 
     void addHeightToUser(User user, int height) {
         user.setHeight(height);
+    }
+
+    void addDateOfBirthToUser (User user, LocalDate dateOfBirth) {
+        user.setBirthDate(dateOfBirth);
     }
 
     public static User.sex userSex() {

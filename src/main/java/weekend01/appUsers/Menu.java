@@ -1,5 +1,6 @@
 package weekend01.appUsers;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Menu {
@@ -7,8 +8,7 @@ public class Menu {
     public static int mainMenu() {
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println();
-        System.out.println("\n\n" +
+        System.out.println("" +
                 "*********************   MENU GŁÓWNE   *********************\n\n" +
                 "Co chcesz zrobić ? \n\n" +
                 "1. Wyświtl listę wszystkich użytkowników \n" +
@@ -34,7 +34,7 @@ public class Menu {
             default:
                 System.out.println("Niewłaściwy wybór! Spróbuj jeszcze raz");
                 System.out.println();
-                return 111;
+                return 1111;
         }
     }
 
@@ -55,5 +55,69 @@ public class Menu {
         }
 
         return choice;
+    }
+
+    public static boolean choseYesNo() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Wybierz T/N");
+        while (true) {
+            String choice = scanner.next().toUpperCase();
+            if (choice.equals("T")) {
+                return true;
+            }
+            if (choice.equals("N")) {
+                return false;
+            } else {
+                System.out.println("Nieprawidłowy wybór! wybierz \"T\" lub \"N\"");
+            }
+        }
+    }
+
+
+    public static int wouldAddHeight() {
+
+        System.out.println("Czy chcesz wprowadzić wzrost?");
+
+        if (choseYesNo()) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    public static int wouldAddDateOfBirth() {
+
+        System.out.println("Czy chcesz wprowadzić datę urodzenia?");
+
+        if (choseYesNo()) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    public static int howHigh() {
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Wpisz wzrost w centymetrach, np. \"185\"");
+        int howHigh = scanner.nextInt();
+        if (howHigh > 220) {
+            System.out.println("Chyba przesadziłeś ;) wpisz jeszcze raz");
+            howHigh();
+        }
+        if (howHigh < 10) {
+            System.out.println("Widziałem karła ale to jest przegięcie lol - wpisz jeszcze raz");
+        } else {
+            return howHigh;
+        }
+        return 1111;
+    }
+
+    public static LocalDate addDateOfBirth() {
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Wprowadź datę urodzenia w formacie rrrr-mm-dd, np. 1986-10-18");
+        String scannedDate = scanner.next();
+        return LocalDate.parse(scannedDate);
     }
 }

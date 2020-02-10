@@ -26,8 +26,18 @@ public class AppUsers {
 
                 case 2:
                     usersCollection.addUser(new User(usersCollection.userNumber + 1, getUserFirstName(), userLastName(), userSex()));
-                    usersCollection.printAllUsers();
+                    usersCollection.printAllUsers(); // todo maybe sould print ony one user?
                     System.out.println("Poprawnie wprowadzono dane obowiązkowe. Czy chcesz wprowadzić dane opcjonalne?");
+
+                    if (Menu.choseYesNo()) {
+                        if (Menu.wouldAddHeight() == 1) {
+                                usersCollection.addHeightToUser(usersCollection.users[usersCollection.userNumber - 1], Menu.howHigh());
+                        }
+                        if (Menu.wouldAddDateOfBirth() == 1) {
+                           usersCollection.addDateOfBirthToUser(usersCollection.users[usersCollection.userNumber - 1], Menu.addDateOfBirth());
+                        }
+
+                    }
                     continue;
 
                 case 3:
