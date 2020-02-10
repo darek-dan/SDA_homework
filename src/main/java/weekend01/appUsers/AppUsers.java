@@ -103,7 +103,10 @@ public class AppUsers {
                     System.out.println("#################    KONIEC PROGRAMU    #################");
                     continue;
                 case 5:
-                    usersCollection.LoadUsersFromFile();
+                    usersCollection.loadUsersFromFile();
+                    continue;
+                case 6:
+                    usersCollection.WriteUsersToFile();
             }
         }
     }
@@ -115,27 +118,19 @@ public class AppUsers {
         return choseUser;
     }
 
-    //  public static boolean yesNo () {
-    //   boolean yesNo;
-    // Scanner scanner = new Scanner(System.in);
-    // if (scanner.nextLine())
-    // }
-
     public static int menu() {
         Scanner scanner = new Scanner(System.in);
         System.out.println();
-        System.out.println("*********************   MENU GŁÓWNE   *********************");
-        System.out.println("");
-        System.out.println("Co chcesz zrobić ? ");
-        System.out.println("");
-        System.out.println("1. Wyświtl listę wszystkich użytkowników");
-        System.out.println("2. Dodaj nowego użytkownika");
-        System.out.println("3. Edytuj użytkownika");
-        System.out.println("4. Zakończ działanie");
-        System.out.println("5. Wczytaj Użytkowników z pliku");
-
-        System.out.println("");
-        System.out.println("Wpisz odpowiednią cyfrę i naciśnij enter");
+        System.out.println("\n\n" +
+                "*********************   MENU GŁÓWNE   *********************\n\n" +
+                "Co chcesz zrobić ? \n\n " +
+                "1. Wyświtl listę wszystkich użytkowników \n" +
+                "2. Dodaj nowego użytkownika \n" +
+                "3. Edytuj użytkownika \n" +
+                "4. Zakończ działanie \n" +
+                "5. Wczytaj Użytkowników z pliku \n" +
+                "6. Zapisz wszystkich Użytkowników do pliku \n\n" +
+                "Wpisz odpowiednią cyfrę i naciśnij enter");
         switch (scanner.nextInt()) {
             case 1:
                 return 1;
@@ -147,6 +142,8 @@ public class AppUsers {
                 return 4;
             case 5:
                 return 5;
+            case 6:
+                return 6;
             default:
                 System.out.println("Niewłaściwy wybór! Spróbuj jeszcze raz");
                 System.out.println();

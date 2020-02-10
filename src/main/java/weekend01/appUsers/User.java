@@ -1,10 +1,11 @@
 package weekend01.appUsers;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class User {
 
-    public enum Sex {
+    enum Sex {
         MALE,
         FEMALE,
     }
@@ -12,9 +13,9 @@ public class User {
     private final String lastName;
     private Sex sex;
     private int height;
-    private String birthDate;
+    private LocalDate birthDate;
     private String[] interests;
-    // static final int MIN_AGE = 18;
+// static final int MIN_AGE = 18;
 
     public User(String firstName, String lastName, Sex sex) {
 
@@ -23,7 +24,7 @@ public class User {
         this.sex = sex;
     }
 
-    public User(String firstName, String lastName, Sex sex, int height, String birthDate, String[] interests) {
+    public User(String firstName, String lastName, Sex sex, int height, LocalDate birthDate, String[] interests) {
 
         this.firstName = firstName;
         this.lastName = lastName;
@@ -80,11 +81,11 @@ public class User {
         this.height = height;
     }
 
-    public String getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(String birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 
@@ -95,6 +96,8 @@ public class User {
     public void setInterests(String[] interests) {
         this.interests = interests;
     }
+
+
 
     // boolean isAdult() {
     //     boolean isAdult = sex >= MIN_AGE;

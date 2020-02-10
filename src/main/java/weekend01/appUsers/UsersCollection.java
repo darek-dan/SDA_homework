@@ -2,11 +2,16 @@ package weekend01.appUsers;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class UsersCollection {
 
-    private static int userSex;
+    final LocalDate dateDefault = LocalDate.parse("1000-01-01");
+    private static String userSex;
     User[] users = new User[100];
     int userNumber = 0;
     int actualUserNumber;
@@ -21,36 +26,72 @@ public class UsersCollection {
         }
     }
 
-    public static User.Sex userSex() {
-        if (userSex == 1) {
-            return User.Sex.FEMALE;
-        } else {
-            return User.Sex.MALE;
-        }
-    }
-
-    void LoadUsersFromFile() throws FileNotFoundException {
+    void loadUsersFromFile() throws FileNotFoundException {
         Scanner scanner = new Scanner(new File("C:\\Users\\darek\\OneDrive\\Java\\SDA_homework\\src\\main" +
                 "\\java\\weekend01\\appUsers\\Users.txt"));
         while (scanner.hasNext()) {
             scanner.findInLine("firstName=");
             String userFirstName = scanner.next();
+
             scanner.findInLine("lastName=");
             String userLastName = scanner.next();
-            scanner.findInLine("sex=");
-            userSex = scanner.nextInt();
-            scanner.findInLine("end;");
-            scanner.nextLine();
-            System.out.println(userFirstName + " " + userLastName + " " + userSex());
-            addUser(new User(userFirstName, userLastName, userSex()));
-            // addUser(new User(scanner.findInLine("firstName="), scanner.findInLine("lastName="), scanner.next()));
 
+            scanner.findInLine("sex=");
+            userSex = scanner.next();
+
+            scanner.findInLine("height=");
+            int userHeight = scanner.nextInt();
+
+            scanner.findInLine("birthDate=");
+            String birthDate = scanner.next();
+            LocalDate dateOfBirthParsed = LocalDate.parse(birthDate);
+
+            // String[] interests = scanner.nextLine().split(",");
+            Pattern interestsPattern = Pattern.compile("\".+\".+");
+            Matcher interestsMatched = interestsPattern.matcher(scanner.nextLine());
+            // System.out.println(interestsMatched);
+            String[] tempInterests = new String[100];
+            int numberOfInterests = 0;
+            while (interestsMatched.find()) {
+                tempInterests[numberOfInterests] = interestsMatched.group();
+                numberOfInterests++;
+            }
+            String[] interests = new String[numberOfInterests];
+
+            for (int i = 0; i < numberOfInterests; i++) {
+                interests[i] = tempInterests[i];
+                i++;
+                // System.out.println(Arrays.toString(tempInterests));
+            }
+            // scanner.nextLine();
+            System.out.println("Dodano: " + userFirstName + " " + userLastName);
+            addUser(new User(userFirstName, userLastName, userSex(), userHeight, dateOfBirthParsed, interests));
+            // scanner.findInLine("end;");
         }
     }
 
-    void printAllUsers() {
-        // wypisz wszystkie elementy tablicy this.users od 0 do (this.userNumber -1)
+    void WriteUsersToFile() throws FileNotFoundException {
+        StringBuilder file = new StringBuilder();
+        for (int i = 0; i < userNumber; i++) {
+            actualUserNumber = i + 1;
+            file.append(BuildLineToSave(users[i]));
+        }
+        // System.out.println(file);
+        PrintWriter saveToFile = new PrintWriter("C:\\Users\\darek\\OneDrive\\Java\\SDA_homework\\src\\main" +
+                "\\java\\weekend01\\appUsers\\Users.txt");
+        saveToFile.println(file);
+        saveToFile.close();
+        System.out.println("Zapisano Użytkowników w pliku :)");
 
+    }
+
+    String BuildLineToSave(User user) {
+        String lineToSave = ("firstName= " + user.getFirstName() + " lastName= " + user.getLastName() +
+                " sex= " + user.getSex() + " end;\r\n");
+        return lineToSave;
+    }
+
+    void printAllUsers() {
         for (int i = 0; i < userNumber; i++) {
             actualUserNumber = i + 1;
             printUser(users[i]);
@@ -63,7 +104,8 @@ public class UsersCollection {
 
     void printExtendedUser(User user) {
         System.out.println("Użytkownik " + actualUserNumber + " Imie: "
-                + user.getFirstName() + " Nazwisko: " + user.getLastName() + "płeć: " + user.getSex());
+                + user.getFirstName() + " Nazwisko: " + user.getLastName() + "płeć: " + user.getSex()
+                + " Data urodzenia: " + user.getBirthDate() + " zainteresowania: " + printInterests(user.getInterests()));
 
     }
 
@@ -72,7 +114,29 @@ public class UsersCollection {
                 + user.getFirstName() + " Nazwisko: " + user.getLastName());
     }
 
+    String printInterests(String[] interests) {
+        StringBuilder interestsString = new StringBuilder();
+        for (String element : interests) {
+            interestsString.append(element);
+        }
+        return interestsString.toString();
+    }
+
+    void addHeightToUser(User user, int height) {
+        user.setHeight(height);
+    }
+
     public void setActualUserNumber(int actualUserNumber) {
         this.actualUserNumber = actualUserNumber;
     }
+
+
+    public static User.Sex userSex() {
+        if (userSex.equals("FEMALE")) {
+            return User.Sex.FEMALE;
+        } else {
+            return User.Sex.MALE;
+        }
+    }
+
 }
