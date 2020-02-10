@@ -5,27 +5,30 @@ import java.util.Scanner;
 
 public class User {
 
-    enum Sex {
-        MALE,
-        FEMALE,
-    }
+    private int userNumber = 0;
     private final String firstName;
     private final String lastName;
     private Sex sex;
     private int height;
     private LocalDate birthDate;
     private String[] interests;
-// static final int MIN_AGE = 18;
+    // static final int MIN_AGE = 18;
+    enum Sex {
+        MALE,
+        FEMALE,
+    }
 
-    public User(String firstName, String lastName, Sex sex) {
+    public User(int userNumber, String firstName, String lastName, Sex sex) {
 
+        this.userNumber = userNumber;
         this.firstName = firstName;
         this.lastName = lastName;
         this.sex = sex;
     }
 
-    public User(String firstName, String lastName, Sex sex, int height, LocalDate birthDate, String[] interests) {
+    public User(int userNumber, String firstName, String lastName, Sex sex, int height, LocalDate birthDate, String[] interests) {
 
+        this.userNumber = userNumber;
         this.firstName = firstName;
         this.lastName = lastName;
         this.sex = sex;
@@ -97,8 +100,9 @@ public class User {
         this.interests = interests;
     }
 
-
-
+    public int getUserNumber() {
+        return userNumber;
+    }
     // boolean isAdult() {
     //     boolean isAdult = sex >= MIN_AGE;
     //    return isAdult;

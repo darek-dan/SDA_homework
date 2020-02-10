@@ -15,14 +15,12 @@ public class UsersCollection {
     User[] users = new User[100];
     int userNumber = 0;
     int actualUserNumber;
-    int usersTotal = 0;
     private User.Sex sex;
 
     void addUser(User... users) {
         for (User newUser : users) {
             this.users[userNumber] = newUser;
             userNumber++;
-            usersTotal++;
         }
     }
 
@@ -65,7 +63,7 @@ public class UsersCollection {
             }
             // scanner.nextLine();
             System.out.println("Dodano: " + userFirstName + " " + userLastName);
-            addUser(new User(userFirstName, userLastName, userSex(), userHeight, dateOfBirthParsed, interests));
+            addUser(new User(userNumber + 1, userFirstName, userLastName, userSex(), userHeight, dateOfBirthParsed, interests));
             // scanner.findInLine("end;");
         }
     }
@@ -93,24 +91,23 @@ public class UsersCollection {
 
     void printAllUsers() {
         for (int i = 0; i < userNumber; i++) {
-            actualUserNumber = i + 1;
             printUser(users[i]);
         }
     }
 
     void printExtendedUser(int actualUserNumber) {
-        printExtendedUser(users[actualUserNumber]);
+        printExtendedUser(users[actualUserNumber - 1]);
     }
 
     void printExtendedUser(User user) {
-        System.out.println("Użytkownik " + actualUserNumber + " Imie: "
+        System.out.println("Użytkownik " + user.getUserNumber() + " Imie: "
                 + user.getFirstName() + " Nazwisko: " + user.getLastName() + "płeć: " + user.getSex()
                 + " Data urodzenia: " + user.getBirthDate() + " zainteresowania: " + printInterests(user.getInterests()));
 
     }
 
     void printUser(User user) {
-        System.out.println("Użytkownik " + actualUserNumber + " Imie: "
+        System.out.println("Użytkownik " + user.getUserNumber() + " Imie: "
                 + user.getFirstName() + " Nazwisko: " + user.getLastName());
     }
 
@@ -125,11 +122,6 @@ public class UsersCollection {
     void addHeightToUser(User user, int height) {
         user.setHeight(height);
     }
-
-    public void setActualUserNumber(int actualUserNumber) {
-        this.actualUserNumber = actualUserNumber;
-    }
-
 
     public static User.Sex userSex() {
         if (userSex.equals("FEMALE")) {
