@@ -84,8 +84,8 @@ public class UsersCollection {
         }
     }
 
-    void printExtendedUser(int actualUserNumber) {
-        printExtendedUser(users[actualUserNumber - 1]);
+    void printExtendedUser(int userNumber) {
+        printExtendedUser(users[userNumber - 1]);
     }
 
     void printExtendedUser(User user) {
@@ -123,6 +123,10 @@ public class UsersCollection {
 
     void addDateOfBirthToUser (User user, LocalDate dateOfBirth) {
         user.setBirthDate(dateOfBirth);
+    }
+
+    void addInterestsToUser (User user, String [] interests) {
+        user.setInterests(interests);
     }
 
     public static User.sex userSex() {

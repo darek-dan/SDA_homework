@@ -8,7 +8,7 @@ public class Menu {
     public static int mainMenu() {
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("" +
+        System.out.println("\n" +
                 "*********************   MENU GŁÓWNE   *********************\n\n" +
                 "Co chcesz zrobić ? \n\n" +
                 "1. Wyświtl listę wszystkich użytkowników \n" +
@@ -38,7 +38,7 @@ public class Menu {
         }
     }
 
-    public static int choseUserToPrint(int usersTotal) {
+    public static int choseUser(int usersTotal) {
 
         Scanner scanner = new Scanner(System.in);
         System.out.println();
@@ -51,7 +51,7 @@ public class Menu {
             System.out.println("Niewłaściwy wybór! Spróbuj jeszcze raz");
             System.out.println();
             choice = 0;
-            choseUserToPrint(usersTotal);
+            choseUser(usersTotal);
         }
 
         return choice;
@@ -74,20 +74,9 @@ public class Menu {
     }
 
 
-    public static int wouldAddHeight() {
+    public static int wouldAdd(String what) {
 
-        System.out.println("Czy chcesz wprowadzić wzrost?");
-
-        if (choseYesNo()) {
-            return 1;
-        } else {
-            return 0;
-        }
-    }
-
-    public static int wouldAddDateOfBirth() {
-
-        System.out.println("Czy chcesz wprowadzić datę urodzenia?");
+        System.out.println("Czy chcesz wprowadzić " + what);
 
         if (choseYesNo()) {
             return 1;
@@ -96,14 +85,15 @@ public class Menu {
         }
     }
 
-    public static int howHigh() {
+
+    public static int addHeight() {
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Wpisz wzrost w centymetrach, np. \"185\"");
         int howHigh = scanner.nextInt();
         if (howHigh > 220) {
             System.out.println("Chyba przesadziłeś ;) wpisz jeszcze raz");
-            howHigh();
+            addHeight();
         }
         if (howHigh < 10) {
             System.out.println("Widziałem karła ale to jest przegięcie lol - wpisz jeszcze raz");
@@ -119,5 +109,13 @@ public class Menu {
         System.out.println("Wprowadź datę urodzenia w formacie rrrr-mm-dd, np. 1986-10-18");
         String scannedDate = scanner.next();
         return LocalDate.parse(scannedDate);
+    }
+
+    public static String[] addInterests() {
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Wprowadź wszystkie zainteresowania oddzielone przecinkami BEZ SPACJI!, np. pływanie,bieganie,jazda rowrem,taniec nowoczesny");
+        String[] scannedInterests = scanner.next().split(",");
+        return scannedInterests;
     }
 }

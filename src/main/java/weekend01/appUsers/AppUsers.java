@@ -1,6 +1,7 @@
 package weekend01.appUsers;
 
 import java.io.FileNotFoundException;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class AppUsers {
@@ -9,50 +10,62 @@ public class AppUsers {
 
         UsersCollection usersCollection = new UsersCollection();
 
-        // int choiceMain = 0;
         int choiceMain;
         while ((choiceMain = Menu.mainMenu()) != 4) {
 
             switch (choiceMain) {
                 case 1:
+
+                    int choiceUser = Menu.choseUser(usersCollection.userNumber);
+                    System.out.println("*********************   UŻYTKOWNICY   *********************");
                     usersCollection.printAllUsers();
-                    int choiceUser = Menu.choseUserToPrint(usersCollection.userNumber);
                     if (choiceUser != 0) {
                         usersCollection.printExtendedUser(choiceUser);
-                        continue;
                     }
-                    continue;
-
+                    break;
 
                 case 2:
                     usersCollection.addUser(new User(usersCollection.userNumber + 1, getUserFirstName(), userLastName(), userSex()));
-                    usersCollection.printAllUsers(); // todo maybe sould print ony one user?
+                    usersCollection.printUser(usersCollection.users[usersCollection.userNumber - 1]);
                     System.out.println("Poprawnie wprowadzono dane obowiązkowe. Czy chcesz wprowadzić dane opcjonalne?");
 
                     if (Menu.choseYesNo()) {
-                        if (Menu.wouldAddHeight() == 1) {
-                                usersCollection.addHeightToUser(usersCollection.users[usersCollection.userNumber - 1], Menu.howHigh());
+                        if (Menu.wouldAdd("wzrost ?") == 1) {
+                            usersCollection.addHeightToUser(usersCollection.users[usersCollection.userNumber - 1], Menu.addHeight());
+                        } else {
+                            usersCollection.addHeightToUser(usersCollection.users[usersCollection.userNumber - 1], 0);
                         }
-                        if (Menu.wouldAddDateOfBirth() == 1) {
-                           usersCollection.addDateOfBirthToUser(usersCollection.users[usersCollection.userNumber - 1], Menu.addDateOfBirth());
+                        if (Menu.wouldAdd("datę urodzenia ?") == 1) {
+                            usersCollection.addDateOfBirthToUser(usersCollection.users[usersCollection.userNumber - 1], Menu.addDateOfBirth());
+                        } else {
+                            usersCollection.addDateOfBirthToUser(usersCollection.users[usersCollection.userNumber - 1], LocalDate.parse("1000-01-01"));
                         }
-
+                        if (Menu.wouldAdd("zainteresowania ?") == 1) {
+                            usersCollection.addInterestsToUser(usersCollection.users[usersCollection.userNumber - 1], Menu.addInterests());
+                        } else {
+                            usersCollection.addInterestsToUser(usersCollection.users[usersCollection.userNumber - 1], new String[]{"nie wpisano"});
+                        }
+                    } else {
+                        usersCollection.addHeightToUser(usersCollection.users[usersCollection.userNumber - 1], 0);
+                        usersCollection.addDateOfBirthToUser(usersCollection.users[usersCollection.userNumber - 1], LocalDate.parse("1000-01-01"));
+                        usersCollection.addInterestsToUser(usersCollection.users[usersCollection.userNumber - 1], new String[]{"nie wpisano"});
                     }
-                    continue;
+                    break;
 
                 case 3:
                     System.out.println("Funkcja nie zaimplementowana");
-                    continue;
+                    break;
                 case 4:
-                    System.out.println("#################    KONIEC PROGRAMU    #################");
-                    continue;
+                    break;
                 case 5:
                     usersCollection.addUsersFromFile();
-                    continue;
+                    break;
                 case 6:
                     usersCollection.WriteUsersToFile();
             }
         }
+
+        System.out.println("#################    KONIEC PROGRAMU    #################");
     }
 
     public static String getUserFirstName() {
@@ -62,17 +75,10 @@ public class AppUsers {
 
     }
 
-
     public static String userLastName() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Podaj Nazwisko użytkownika: ");
         return scanner.nextLine();
-    }
-
-    public static int userHeight() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Podaj wzrost użytkownika: ");
-        return scanner.nextInt();
     }
 
     public static int sex() {
