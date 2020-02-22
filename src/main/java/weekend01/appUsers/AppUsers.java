@@ -6,9 +6,11 @@ import java.util.Scanner;
 
 public class AppUsers {
 
+    static UsersCollection usersCollection = new UsersCollection();
+
     public static void main(String[] args) throws FileNotFoundException {
 
-        UsersCollection usersCollection = new UsersCollection();
+        // UsersCollection usersCollection = new UsersCollection();
 
         int choiceMain;
         while ((choiceMain = Menu.mainMenu()) != 4) {
@@ -16,9 +18,10 @@ public class AppUsers {
             switch (choiceMain) {
                 case 1:
 
+                    // System.out.println("*********************   UŻYTKOWNICY   *********************");
+                    // usersCollection.printAllUsers();
                     int choiceUser = Menu.choseUser(usersCollection.userNumber);
-                    System.out.println("*********************   UŻYTKOWNICY   *********************");
-                    usersCollection.printAllUsers();
+
                     if (choiceUser != 0) {
                         usersCollection.printExtendedUser(choiceUser);
                     }
@@ -68,6 +71,10 @@ public class AppUsers {
         System.out.println("#################    KONIEC PROGRAMU    #################");
     }
 
+    public void printAllUsers (int userNumber) {
+
+    }
+
     public static String getUserFirstName() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Podaj imie użytkownika: ");
@@ -101,6 +108,10 @@ public class AppUsers {
         } else {
             return User.sex.MALE;
         }
+    }
+
+    static void printListOfUsers(UsersCollection users) {
+        users.printAllUsers();
     }
 
 }

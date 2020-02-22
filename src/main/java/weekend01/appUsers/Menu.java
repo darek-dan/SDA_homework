@@ -39,22 +39,25 @@ public class Menu {
     }
 
     public static int choseUser(int usersTotal) {
-
+        System.out.println("*********************   UŻYTKOWNICY   *********************\n");
+        AppUsers.printListOfUsers(AppUsers.usersCollection);
         Scanner scanner = new Scanner(System.in);
         System.out.println();
         System.out.println("Powyżej dane podstawowe wszystkich użytkowników");
         System.out.println();
         System.out.println("Jeśli chcesz wyświetlić dodatkowe informację o użytkowniku wybierz jego numer i naciśnij enter");
         System.out.println("Jeśli nie wpisz 0 i wciśnij enter");
-        int choice = scanner.nextInt();
-        if (choice > usersTotal || choice < 0) {
-            System.out.println("Niewłaściwy wybór! Spróbuj jeszcze raz");
-            System.out.println();
-            choice = 0;
-            choseUser(usersTotal);
+        while (true) {
+            int choice = scanner.nextInt();
+            if (choice > usersTotal || choice < 0) {
+                System.out.println("Niewłaściwy wybór! Spróbuj jeszcze raz     (aby wyjść wybierz \"0\")");
+                System.out.println();
+
+            } else {
+                return choice;
+            }
         }
 
-        return choice;
     }
 
     public static boolean choseYesNo() {
@@ -115,7 +118,6 @@ public class Menu {
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Wprowadź wszystkie zainteresowania oddzielone przecinkami BEZ SPACJI!, np. pływanie,bieganie,jazda rowrem,taniec nowoczesny");
-        String[] scannedInterests = scanner.next().split(",");
-        return scannedInterests;
+        return scanner.next().split(",");
     }
 }
