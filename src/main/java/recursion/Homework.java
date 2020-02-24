@@ -7,10 +7,11 @@ public class Homework {
     public static void main(String[] args) {
 
         System.out.println("\nZadanie pierwsze\n");
-
         int[] table = {10, 15, 18, 1, 6, 88, 56, 100, 500, 11, 68, 66, 555, -100};
+        ReverseTable reversedTable = new ReverseTable();
+        int[] revTable = reversedTable.reverseTable(table);
         System.out.println("Oryginalna tablica : " + Arrays.toString(table));
-        System.out.println("Odwrócona tablica  : " + Arrays.toString(reverseTable(table)) +
+        System.out.println("Odwrócona tablica  : " + Arrays.toString(revTable) +
 
                 "\n\nZadanie drugie\n");
 
@@ -23,25 +24,27 @@ public class Homework {
         } else {
             System.out.println("Liczby " + x + " nie znaleziono w tablicy");
         }
+
+        System.out.println("\n\nZadanie trzecie\n");
+        DecToBin number = new DecToBin();
+        number.transformToBin(155);
+        System.out.println();
+        number.transformToBin(1555);
+        System.out.println();
+        number.transformToBin(15557);
+        System.out.println();
+        number.transformToBinRec(15557);
+
+        System.out.println("\n\nZadanie czwarte\n");
+        IsPalindrome text = new IsPalindrome();
+        text.isPalindrome("kobyła ma mały bok");
+        text.isPalindrome("jeż leje lwa, paw leje lżej");
+        text.isPalindrome("leci bażant na żabi cel");
+        text.isPalindrome("kobyła ma maały bok");
+
+
     }
 
-    public static int[] reverseTable(int[] table) {
-        int tableLength = table.length;
-        // System.out.println(tableLength);
-        int[] newTable = new int[tableLength];
-        // System.out.println(Arrays.toString(newTable));
-        return reversedCopyTable(tableLength - 1, 0, table, newTable);
-    }
-
-    public static int[] reversedCopyTable(int tableLength, int tablePoz, int[] table, int[] newTable) {
-        if (tablePoz == tableLength) {
-            newTable[0] = table[tableLength];
-            return newTable;
-        } else {
-            newTable[tableLength - tablePoz] = table[tablePoz];
-            return reversedCopyTable(tableLength, tablePoz + 1, table, newTable);
-        }
-    }
 
     public static int findPos(int number, int[] table) {
 
@@ -51,13 +54,13 @@ public class Homework {
         if (number > table[rightIndex] || number < table[leftIndex]) {
             return -1;
         }
-        if (number == table[rightIndex]){
+        if (number == table[rightIndex]) {
             return rightIndex;
         }
-        return findPozRec(number, leftIndex, rightIndex, table);
+        return findPosRec(number, leftIndex, rightIndex, table);
     }
 
-    public static int findPozRec(int number, int leftIndex, int rightIndex, int[] table) {
+    public static int findPosRec(int number, int leftIndex, int rightIndex, int[] table) {
 
         if (leftIndex == rightIndex) {
             return -1;
@@ -69,9 +72,9 @@ public class Homework {
             return middleIndex;
         } else {
             if (table[middleIndex] > number) {
-                return findPozRec(number, leftIndex, middleIndex, table);
+                return findPosRec(number, leftIndex, middleIndex, table);
             } else {
-                return findPozRec(number, middleIndex + 1, rightIndex, table);
+                return findPosRec(number, middleIndex + 1, rightIndex, table);
             }
         }
     }
